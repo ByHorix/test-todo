@@ -3,4 +3,5 @@ export interface Task {
   id: number
   isCompleted: boolean
   taskNumber: number
+  isEditing: boolean
 }

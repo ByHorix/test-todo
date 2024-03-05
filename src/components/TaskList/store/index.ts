@@ -9,7 +9,8 @@ type State = {
 
 // Define the initial state using that type
 const initialState: State = {
-  taskList: [{id: 111, taskNumber: 1, isEditing: false, description: 'hello', isCompleted: false}]
+  // taskList: [{id: 111, taskNumber: 1, isEditing: false, description: 'hello', isCompleted: false}]
+  taskList: []
 }
 
 export const taskListSlice = createSlice({
@@ -44,7 +45,7 @@ export const taskListSlice = createSlice({
     },
 
     addNewTask: (state, action: PayloadAction<Omit<Task, 'taskNumber'>>) => {
-      const newTaskNumber = state.taskList[0].taskNumber + 1 || 1
+      const newTaskNumber = state.taskList[0]?.taskNumber + 1 || 1
       const newTask = {...action.payload, taskNumber: newTaskNumber}
 
       state.taskList = [

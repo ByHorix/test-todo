@@ -5,6 +5,7 @@ import {TaskCard} from "./TaskCard"
 import {NewTask} from "./NewTask"
 import {FiltersEnum} from "../../types/enums"
 import {refreshTasksCount} from "../Layout/store"
+import {EmptyList} from "./EmptyList/EmptyList"
 
 export const TaskList = (): React.ReactElement => {
   const {taskList, filteredTaskList} = useAppSelector((state) => state.taskList)
@@ -20,6 +21,7 @@ export const TaskList = (): React.ReactElement => {
 
   return (
     <CardBody className='overflow-scroll'>
+      {taskList.length === 0 && !isAddingNew && <EmptyList/>}
       {isAddingNew && <NewTask/>}
       {currentTaskList.map((task) => <TaskCard key={task.id} {...task}/>)}
     </CardBody>

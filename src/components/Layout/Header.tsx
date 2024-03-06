@@ -1,5 +1,5 @@
 import React from "react"
-import {Badge, Button, CardHeader, CardTitle} from "reactstrap"
+import {Button, CardHeader, CardTitle} from "reactstrap"
 import {useAppDispatch, useAppSelector} from "../../utilities/hooks/redux"
 import {switchAddingNew} from "./store"
 

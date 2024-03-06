@@ -1,9 +1,10 @@
 import {Task} from "../../types"
 import React, {ChangeEvent, useState} from "react"
-import {Button, Card, CardBody, Col, Form, Input, Row} from "reactstrap"
+import {Button, Card, CardBody, Col, Form, FormFeedback, FormGroup, Input, Row} from "reactstrap"
 import {useAppDispatch} from "../../utilities/hooks/redux"
 import {deleteTask, editTask, switchIsEditing} from "./store"
 import "./styles.css"
+import {validateTask} from "../../utilities/Utills"
 
 export const TaskCard = (task: Task): React.ReactElement => {
   const {
@@ -16,16 +17,25 @@ export const TaskCard = (task: Task): React.ReactElement => {
   const dispatch = useAppDispatch()
 
   const [inputValue, setInputValue] = useState(description)
+  const [isValid, setIsValid] = useState(true)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setInputValue(e.currentTarget.value)
+
+    if (!isValid) {
+      setIsValid(true)
+    }
   }
 
   const handleEdit = (e: any): void => {
     e.preventDefault()
 
     if (description !== inputValue) {
-      dispatch(editTask({...task, description: inputValue}))
+      if (validateTask(inputValue)) {
+        dispatch(editTask({...task, description: inputValue}))
+      } else {
+        setIsValid(false)
+      }
     }
   }
 
@@ -51,7 +61,10 @@ export const TaskCard = (task: Task): React.ReactElement => {
             {
               isEditing
                 ? <Form className='w-100 d-flex justify-content-between align-items-baseline' onSubmit={handleEdit}>
-                  <Input value={inputValue} onChange={handleChange}/>
+                  <FormGroup className='position-relative w-100'>
+                    <Input value={inputValue} onChange={handleChange} invalid={!isValid}/>
+                    <FormFeedback tooltip>Length must be less than or equal to 60 characters. Not empty!</FormFeedback>
+                  </FormGroup>
                   <div className='task-card__buttons'>
                     <Button
                       color='success'

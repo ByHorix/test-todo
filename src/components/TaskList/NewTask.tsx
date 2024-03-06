@@ -1,7 +1,7 @@
 import {Button, Card, CardBody, CardHeader, Form, Input} from "reactstrap"
-import React, {ChangeEvent, FormEventHandler, useState} from "react"
-import {useAppDispatch} from "../../hooks/redux"
-import {addNewTask, switchIsEditing} from "./store"
+import React, {ChangeEvent, useState} from "react"
+import {useAppDispatch} from "../../utilities/hooks/redux"
+import {addNewTask} from "./store"
 import {switchAddingNew} from "../Layout/store"
 
 export const NewTask = (): React.ReactElement => {
@@ -29,7 +29,7 @@ export const NewTask = (): React.ReactElement => {
 
   return (
     <Card className="mb-2">
-      <CardHeader className="d-flex opa flex-wrap justify-content-between align-content-center">
+      <CardHeader className="d-flex opa flex-wrap justify-content-between align-items-center">
         <h5>
           What do you need to do?
         </h5>

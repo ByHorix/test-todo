@@ -1,0 +1,28 @@
+.task-card__buttons {
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+form .task-card__buttons {
+    opacity: 1;
+    margin-left: 10px;
+}
+
+.task-card__buttons button:not(:last-child) {
+    margin-right: 10px;
+}
+
+.task-card__header:hover .task-card__buttons {
+    opacity: 1;
+}
+
+.task-card:hover .task-card__buttons {
+    opacity: 1;
+}
+
+.task-card__text {
+    cursor: pointer;
+    padding: 6px 10px;
+}

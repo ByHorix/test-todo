@@ -54,13 +54,22 @@ export const taskListSlice = createSlice({
           ({...task, taskNumber: task.taskNumber + 1}))
       ]
     },
+
+    deleteTask: (state, action: PayloadAction<number>) => {
+      const taskId = action.payload
+
+      state.taskList = sortByTaskNumber(
+        state.taskList.filter((task) => task.id !== taskId)
+      ).map((task, index) => ({...task, taskNumber: index + 1}))
+    }
   },
 })
 
 export const {
   addNewTask,
   switchIsEditing,
-  editTask
+  editTask,
+  deleteTask
 } = taskListSlice.actions
 
 export default taskListSlice.reducer

@@ -1,14 +1,14 @@
 import {Task} from "../../types"
 import React, {ChangeEvent, useState} from "react"
-import {Button, Card, CardBody, CardHeader, Form, Input} from "reactstrap"
-import {useAppDispatch} from "../../hooks/redux"
-import {editTask, switchIsEditing} from "./store"
+import {Button, Card, CardBody, Col, Form, Input, Row} from "reactstrap"
+import {useAppDispatch} from "../../utilities/hooks/redux"
+import {deleteTask, editTask, switchIsEditing} from "./store"
+import "./styles.css"
 
 export const TaskCard = (task: Task): React.ReactElement => {
   const {
     isCompleted,
     isEditing,
-    taskNumber,
     description,
     id
   } = task
@@ -21,7 +21,9 @@ export const TaskCard = (task: Task): React.ReactElement => {
     setInputValue(e.currentTarget.value)
   }
 
-  const handleEdit = (): void => {
+  const handleEdit = (e: any): void => {
+    e.preventDefault()
+
     if (description !== inputValue) {
       dispatch(editTask({...task, description: inputValue}))
     }
@@ -32,6 +34,8 @@ export const TaskCard = (task: Task): React.ReactElement => {
       taskId: id,
       newEditingValue
     }))
+
+    setInputValue(description)
   }
 
   const handleSwitchIsCompleted = (): void => {
@@ -40,44 +44,54 @@ export const TaskCard = (task: Task): React.ReactElement => {
 
   return (
     <Card className={`opacity-${isCompleted ? "50" : "100"} mb-2`}>
-      <CardHeader className="d-flex opa flex-wrap justify-content-between align-content-center">
-        <h5 className='m-0'>
-          {`Task # ${taskNumber}${isCompleted ? ' completed' : ''}`}
-        </h5>
-        <div>
-          {
-            isEditing
-              ? <>
-                <Button
-                  color='success'
-                  onClick={handleEdit}
-                  disabled={description === inputValue}
+      {/*<CardBody className='d-flex flex-wrap justify-content-between task-card align-items-baseline'>*/}
+      <CardBody className='task-card'>
+        <Row className='align-items-baseline'>
+          <Col className={`col-md-${isEditing || isCompleted ? '12' : '10'}`}>
+            {
+              isEditing
+                ? <Form className='w-100 d-flex justify-content-between align-items-baseline' onSubmit={handleEdit}>
+                  <Input value={inputValue} onChange={handleChange}/>
+                  <div className='task-card__buttons'>
+                    <Button
+                      color='success'
+                      onClick={handleEdit}
+                      disabled={description === inputValue}
+                    >
+                      Save
+                    </Button>
+                    <Button onClick={(): void => handleSwitchIsEditing(false)}>
+                      Cancel
+                    </Button>
+                  </div>
+                </Form>
+                : <div
+                  className={`m-0 task-card__text ${isCompleted && ' text-decoration-line-through'}`}
+                  onClick={handleSwitchIsCompleted}
                 >
-                  Save
-                </Button>
-                <Button onClick={(): void => handleSwitchIsEditing(false)}>
-                  Cancel
-                </Button>
-              </>
-              : <>
-                {
-                  !isCompleted && <Button color='primary' onClick={(): void => handleSwitchIsEditing(true)}>
-                        Edit
+                  {description}
+                </div>
+            }
+          </Col>
+          {
+            !isCompleted && !isEditing &&
+              <Col className='col-md-2'>
+                <div className='task-card__buttons'>
+                  <Button color='primary' onClick={(): void => handleSwitchIsEditing(true)}>
+                      Edit
                   </Button>
-                }
-                <Button onClick={handleSwitchIsCompleted}>Mark as {isCompleted ? 'not completed' : 'completed'}</Button>
-              </>
+                  <Button
+                    color="danger"
+                    onClick={(): void => {
+                      dispatch(deleteTask(id))
+                    }}
+                  >
+                      Delete
+                  </Button>
+                </div>
+              </Col>
           }
-        </div>
-      </CardHeader>
-      <CardBody>
-        {
-          isEditing
-            ? <Form onSubmit={handleEdit}>
-              <Input value={inputValue} onChange={handleChange}/>
-            </Form>
-            : description
-        }
+        </Row>
       </CardBody>
     </Card>
   )

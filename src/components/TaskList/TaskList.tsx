@@ -1,5 +1,5 @@
 import React from "react"
-import {useAppSelector} from "../../hooks/redux"
+import {useAppSelector} from "../../utilities/hooks/redux"
 import {CardBody} from "reactstrap"
 import {TaskCard} from "./TaskCard"
 import {NewTask} from "./NewTask"
@@ -9,7 +9,7 @@ export const TaskList = (): React.ReactElement => {
   const {isAddingNew} = useAppSelector((state) => state.layout)
 
   return (
-    <CardBody>
+    <CardBody className='overflow-scroll'>
       {isAddingNew && <NewTask/>}
       {taskList.map((task) => <TaskCard key={task.id} {...task}/>)}
     </CardBody>

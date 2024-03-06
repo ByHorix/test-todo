@@ -1,0 +1,27 @@
+.custom-badge {
+    padding: 0.07em 0.2em;
+}
+
+.card-header h2 {
+    margin: 0;
+}
+
+@media screen and (max-width: 992px) {
+    .card-header h2 {
+        font-size: 1.4em;
+    }
+
+    .card-header button {
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .card-header h2 {
+        font-size: 1em;
+    }
+
+    .card-header button {
+        font-size: 0.6em;
+    }
+}

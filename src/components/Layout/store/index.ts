@@ -3,7 +3,8 @@ import {FiltersEnum} from "../../../types/enums"
 
 const initialState = {
   isAddingNew: false,
-  activeFilter: FiltersEnum.All
+  activeFilter: FiltersEnum.All,
+  tasksCount: 0
 }
 
 export const layoutSlice = createSlice({
@@ -17,12 +18,17 @@ export const layoutSlice = createSlice({
     changeActiveFilter: (state, action: PayloadAction<FiltersEnum>) => {
       state.activeFilter = action.payload
     },
+
+    refreshTasksCount: (state, action) => {
+      state.tasksCount = action.payload
+    }
   }
 })
 
 export const {
   switchAddingNew,
-  changeActiveFilter
+  changeActiveFilter,
+  refreshTasksCount
 } = layoutSlice.actions
 
 export default layoutSlice.reducer

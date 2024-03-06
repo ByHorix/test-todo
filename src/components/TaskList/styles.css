@@ -26,3 +26,9 @@ form .task-card__buttons {
     cursor: pointer;
     padding: 6px 10px;
 }
+
+@media screen and (max-width: 992px) {
+    .task-card__buttons {
+        opacity: 1;
+    }
+}

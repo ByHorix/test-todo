@@ -3,15 +3,18 @@ import {useAppSelector} from "../../utilities/hooks/redux"
 import {CardBody} from "reactstrap"
 import {TaskCard} from "./TaskCard"
 import {NewTask} from "./NewTask"
+import {FiltersEnum} from "../../types/enums"
 
 export const TaskList = (): React.ReactElement => {
-  const {taskList} = useAppSelector((state) => state.taskList)
-  const {isAddingNew} = useAppSelector((state) => state.layout)
+  const {taskList, filteredTaskList} = useAppSelector((state) => state.taskList)
+  const {isAddingNew, activeFilter} = useAppSelector((state) => state.layout)
+
+  const currentTaskList = activeFilter === FiltersEnum.All ? taskList : filteredTaskList
 
   return (
     <CardBody className='overflow-scroll'>
       {isAddingNew && <NewTask/>}
-      {taskList.map((task) => <TaskCard key={task.id} {...task}/>)}
+      {currentTaskList.map((task) => <TaskCard key={task.id} {...task}/>)}
     </CardBody>
   )
 }

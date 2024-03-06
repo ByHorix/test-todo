@@ -6,15 +6,12 @@ import {FiltersEnum} from "../../../types/enums"
 
 type State = {
   taskList: Task[]
-  activeFilter: FiltersEnum
   filteredTaskList: Task[]
 }
 
 // Define the initial state using that type
 const initialState: State = {
-  // taskList: [{id: 111, taskNumber: 1, isEditing: false, description: 'hello', isCompleted: false}]
   taskList: [],
-  activeFilter: FiltersEnum.All,
   filteredTaskList: []
 }
 
@@ -68,9 +65,7 @@ export const taskListSlice = createSlice({
       ).map((task, index) => ({...task, taskNumber: index + 1}))
     },
 
-    changeActiveFilter: (state, action: PayloadAction<FiltersEnum>) => {
-      state.activeFilter = action.payload
-
+    filterTaskList: (state, action: PayloadAction<FiltersEnum>) => {
       state.filteredTaskList = action.payload === FiltersEnum.All
         ? state.taskList
         : state.taskList.filter(filterPredicates[action.payload])
@@ -83,7 +78,7 @@ export const {
   switchIsEditing,
   editTask,
   deleteTask,
-  changeActiveFilter
+  filterTaskList
 } = taskListSlice.actions
 
 export default taskListSlice.reducer

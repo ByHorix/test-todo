@@ -1,7 +1,9 @@
-import {createSlice} from "@reduxjs/toolkit"
+import {createSlice, PayloadAction} from "@reduxjs/toolkit"
+import {FiltersEnum} from "../../../types/enums"
 
 const initialState = {
-  isAddingNew: false
+  isAddingNew: false,
+  activeFilter: FiltersEnum.All
 }
 
 export const layoutSlice = createSlice({
@@ -10,10 +12,17 @@ export const layoutSlice = createSlice({
   reducers: {
     switchAddingNew: (state) => {
       state.isAddingNew = !state.isAddingNew
-    }
+    },
+
+    changeActiveFilter: (state, action: PayloadAction<FiltersEnum>) => {
+      state.activeFilter = action.payload
+    },
   }
 })
 
-export const {switchAddingNew} = layoutSlice.actions
+export const {
+  switchAddingNew,
+  changeActiveFilter
+} = layoutSlice.actions
 
 export default layoutSlice.reducer

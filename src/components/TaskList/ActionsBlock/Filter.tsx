@@ -1,12 +1,17 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {FiltersEnum} from "../../../types/enums"
 import {Col, Input, Row} from "reactstrap"
 import {useAppDispatch, useAppSelector} from "../../../utilities/hooks/redux"
-import {changeActiveFilter} from "../store"
+import {changeActiveFilter} from "../../Layout/store"
+import {filterTaskList} from "../store"
 
 export const Filter = (): React.ReactElement => {
-  const {activeFilter} = useAppSelector(state => state.taskList)
+  const {activeFilter} = useAppSelector(state => state.layout)
   const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(filterTaskList(activeFilter))
+  }, [activeFilter])
 
   return (
     <Row className='align-items-baseline'>

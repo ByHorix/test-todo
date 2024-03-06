@@ -31,4 +31,18 @@ form .task-card__buttons {
     .task-card__buttons {
         opacity: 1;
     }
+
+    .card-header h5 {
+        font-size: 1.1em;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .card-header h5 {
+        font-size: 0.9em;
+    }
+
+    .task-card__buttons button:not(:last-child) {
+        margin-right: 5px !important;
+    }
 }

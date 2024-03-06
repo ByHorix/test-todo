@@ -4,6 +4,7 @@ import {useAppDispatch} from "../../utilities/hooks/redux"
 import {addNewTask} from "./store"
 import {switchAddingNew} from "../Layout/store"
 import {validateTask} from "../../utilities/Utills"
+import "./styles.css"
 
 export const NewTask = (): React.ReactElement => {
   const [inputValue, setInputValue] = useState('')
@@ -39,11 +40,11 @@ export const NewTask = (): React.ReactElement => {
 
   return (
     <Card className="mb-2">
-      <CardHeader className="d-flex opa flex-wrap justify-content-between align-items-center">
+      <CardHeader className="d-flex opa flex-wrap justify-content-between align-items-center card-header">
         <h5>
           What do you need to do?
         </h5>
-        <div>
+        <div className="task-card__buttons">
           <Button
             color='success'
             onClick={handleSubmit}

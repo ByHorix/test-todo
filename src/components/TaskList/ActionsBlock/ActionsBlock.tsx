@@ -8,11 +8,11 @@ export const ActionsBlock = (): React.ReactElement => {
 
   return (
     <CardHeader>
-      <Row className='align-items-baseline'>
-        <Col className='col-6 col-lg-8'>
+      <Row className='align-items-baseline flex-wrap justify-content-between'>
+        <Col className='col-auto col-sm-6 col-lg-8'>
           {`Tasks count - ${tasksCount}`}
         </Col>
-        <Col className='col-6 col-lg-4'>
+        <Col className='col-auto col-sm-6 col-lg-4'>
           <Filter/>
         </Col>
       </Row>

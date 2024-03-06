@@ -14,11 +14,11 @@ export const Filter = (): React.ReactElement => {
   }, [activeFilter])
 
   return (
-    <Row className='align-items-baseline'>
-      <Col className="col-lg-3">
+    <Row className='align-items-baseline flex-wrap justify-content-between'>
+      <Col className="col-lg-3 col-auto">
         Filter:
       </Col>
-      <Col className="col-lg-9">
+      <Col className="col-lg-9 col-auto">
         <Input type={"select"} value={activeFilter} onChange={(e): void => {
           dispatch(changeActiveFilter(e.currentTarget.value as FiltersEnum))
         }}>

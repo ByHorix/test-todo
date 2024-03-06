@@ -27,7 +27,7 @@ export const TaskCard = (task: Task): React.ReactElement => {
     }
   }
 
-  const handleEdit = (e: any): void => {
+  const handleEdit = (e: React.FormEvent): void => {
     e.preventDefault()
 
     if (description !== inputValue) {

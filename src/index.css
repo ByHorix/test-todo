@@ -17,6 +17,22 @@ code {
   height: 100%;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
 .card-header button:not(:last-child) {
   margin-right: 10px;
+}
+
+@media screen and (max-width: 992px) {
+  button {
+    font-size: 12px !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  button {
+    font-size: 10px !important;
+  }
 }
